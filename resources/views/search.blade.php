@@ -31,11 +31,11 @@
                             Rating
                         </span>
                         <br />
-                        作 者：{{ $value->author }}
+                        Author：{{ $value->author }}
                         <br />
-                        出版社：{{ $value->publisher }}
+                        Publisher：{{ $value->publisher }}
                         <br />
-                        索引号：{{ $value->get_id }}
+                        Category ID：{{ $value->get_id }}
                     </p>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
