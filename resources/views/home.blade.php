@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '暨南大学图书馆')
+@section('title', 'Library Management System')
 @section('content')
 
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp"

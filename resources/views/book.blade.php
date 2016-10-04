@@ -27,17 +27,17 @@
                             Rating
                         </span>
                         <br />
-                        作 者：{{ $book_info->author }}
+                        Author：{{ $book_info->author }}
                         <br />
-                        出版社：{{ $book_info->publisher }}
+                        Publisher：{{ $book_info->publisher }}
                         <br />
-                        页  数：{{ $book_info->pages }}
+                        Number of pages：{{ $book_info->pages }}
                         <br />
-                        ISBN号：{{ $book_info->isbn }}
+                        ISBN：{{ $book_info->isbn }}
                         <br />
-                        市场价：{{ $book_info->price }}
+                        Price：{{ $book_info->price }}
                         <br />
-                        索引号：{{ $book_info->get_id }}
+                        Index Number：{{ $book_info->get_id }}
                       </p>
                       <p>
                         @foreach(explode('|', $book_info->tags) as $tag)
@@ -52,7 +52,7 @@
                 @if (Auth::check())
                 <div class="mdl-card__actions mdl-card--border">
                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="btn_borrow" onclick="">
-                        我要借阅
+                        I want to borrow
                     </a>
                 </div>
                 @endif
@@ -62,13 +62,13 @@
             <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                 <div class="mdl-tabs__tab-bar">
                     <a href="#summary-panel" class="mdl-tabs__tab is-active">
-                        简介
+                        Introduction
                     </a>
                     <a href="#catalog-panel" class="mdl-tabs__tab">
-                        目录
+                        Table of Contents
                     </a>
                     <a href="#author_intro-panel" class="mdl-tabs__tab">
-                        作者简介
+                        About the Author
                     </a>
                 </div>
                 <div class="mdl-tabs__panel is-active" id="summary-panel">
@@ -86,12 +86,12 @@
 </section>
 <script type="text/javascript">
     $("#btn_borrow").click(function(){
-        if(confirm("确定要借阅此书吗？")){
+        if(confirm("Are you sure you want to borrow this book?")){
             $('#btn_borrow').text('Loading……');
             $.post('/manage',{
                 id : {{ $book_info->id }}
             },function(result){
-                $('#btn_borrow').text('已提交，请等待管理员审核！');
+                $('#btn_borrow').text('Submitted, please wait for moderation！');
             });
         }
     });

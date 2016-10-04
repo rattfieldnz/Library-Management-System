@@ -1,16 +1,16 @@
 @extends('layouts.app')
-@section('title', '借书管理')
+@section('title', 'Book Borrowing Management')
 @section('content')
 <section class="section--center mdl-grid mdl-grid--no-spacing">
 <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
   <thead>
     <tr>
-      <th class="mdl-data-table__cell--non-numeric">允许借阅</th>
-      <th>书名</th>
-      <th>借阅人</th>
-      <th>借阅时间</th>
-      <th>归还时间</th>
-      <th class="mdl-data-table__cell--non-numeric">归还图书</th>
+      <th class="mdl-data-table__cell--non-numeric">Borrowing Allowed</th>
+      <th>Title</th>
+      <th>Borrower</th>
+      <th>Borrowing Time</th>
+      <th>Return Time</th>
+      <th class="mdl-data-table__cell--non-numeric">Return Books</th>
     </tr>
   </thead>
   <tbody>
@@ -30,11 +30,11 @@
       @if( $record->return_time > 0 )
           {{ date('Y-m-d H:i', $record->return_time) }}
       @elseif(($record->time+86400*60) < time())
-           已逾期
+           Expired
       @elseif(($record->time+86400*50) < time())
-           即将逾期
+           Overdue Soon
       @else
-          未归还
+          Not Returned
       @endif
       </td>
       <td>
@@ -51,10 +51,9 @@
 </section>
 
 <script type="text/javascript">
-    // 允许外借的按钮
     $("[name='enable_btn']").each(function(){
       $(this).click(function(event){
-        if(confirm('确定外借此书给当前用户？')){
+        if(confirm('Allow this book to be borrowed for current user?')){
           $.ajax({
                url: '/manage/' + $(this).attr('id').replace('enable-',''),
                type: 'PUT',
@@ -64,19 +63,17 @@
                   value: '1'
              },
              success: function(result) {
-                  alert(result.status==1?'登记成功，请将书交与借书者。':'登记失败，请稍后重试！');
+                  alert(result.status==1?'Please register the book with the borrower.':'Registration failed. Please try again later!');
              }
           });
         }else{
-          //阻止事件冒泡
           event.stopPropagation();
         }
       });
     });
-    // 归还图书的按钮
     $("[name='return_btn']").each(function(){
       $(this).click(function(event){
-        if(confirm('确定此书已归还？')){
+        if(confirm('Are you sure the book has been returned?')){
           $.ajax({
                url: '/manage/' + $(this).attr('id').replace('return-',''),
                type: 'PUT',
@@ -86,11 +83,10 @@
                   value: '1'
              },
              success: function(result) {
-                  alert(result.status==1?'登记成功，请尽快将此书入库。':'登记失败，请稍后重试！');
+                  alert(result.status==1?'Please register the book with the borrower.':'Registration failed. Please try again later!');
              }
           });
         }else{
-          //阻止事件冒泡
           event.stopPropagation();
         }
       });

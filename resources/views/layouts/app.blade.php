@@ -38,30 +38,30 @@
                 </div>
                 <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
                     <a href="{{ url('/') }}" class="mdl-layout__tab{!!(Request::is('/')) ? ' is-active' : '' !!}">
-                        首页
+                        Home
                     </a>
                     <a href="#main" class="mdl-layout__tab{!!(Request::is('/')) ? '' : ' is-active' !!}">
-                        当前页
+                        Main Page
                     </a>
                     <a href="#search_layout" class="mdl-layout__tab">
-                        搜索
+                        Search
                     </a>
                     <a href="#help" class="mdl-layout__tab">
-                        帮助
+                        Help
                     </a>
                     @if (Auth::guest())
                     <a href="#login_layout" class="mdl-layout__tab">
-                        登录
+                        Log in
                     </a>
                     <a href="#register_layout" class="mdl-layout__tab">
-                        注册
+                        Register
                     </a>
                     @else
                     <a href="#main" class="mdl-layout__tab">
                         {{ Auth::user()->name }}
                     </a>
                     <a href="{{ url('/logout') }}" class="mdl-layout__tab">
-                        退出
+                        Logout
                     </a>
                     @endif
                     <a href="#search_layout">
@@ -77,7 +77,7 @@
                     </a>
                 </div>
             </header>
-            <main class="mdl-layout__content">
+            <div class="mdl-layout__content">
                 <div class="mdl-layout__tab-panel is-active" id="main">
                     @yield('content')
                 </div>
@@ -85,18 +85,18 @@
                     <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-cell mdl-cell--12-col">
                             <h4>
-                                搜索
+                                Search
                             </h4>
                             <p>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" type="text" id="search_text">
                                     <label class="mdl-textfield__label" for="search_text">
-                                        关键词
+                                        Key words
                                     </label>
                                 </div>
                                 <button onclick="window.location.href='/search/'+$('#search_text').val()+'/page/1';"
                                 class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                                    搜索
+                                    Search
                                 </button>
                             </p>
                         </div>
@@ -107,7 +107,7 @@
                     <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-cell mdl-cell--12-col">
                             <h4>
-                                登录
+                                Log in
                             </h4>
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                                 {!! csrf_field() !!}
@@ -131,7 +131,7 @@
                                         <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" name="remember"
                                         checked>
                                         <span class="mdl-checkbox__label">
-                                            记住登录状态
+                                            Remember me?
                                         </span>
                                     </label>
                                 </p>
@@ -139,10 +139,10 @@
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                                         <i class="fa fa-btn fa-sign-in">
                                         </i>
-                                        登录
+                                        Log in
                                     </button>
                                     <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                        忘记密码？
+                                        Forget password?
                                     </a>
                                 </p>
                             </form>
@@ -153,7 +153,7 @@
                     <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-cell mdl-cell--12-col">
                             <h4>
-                                注册
+                                Register
                             </h4>
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                                 {!! csrf_field() !!}
@@ -180,133 +180,28 @@
                                         </label>
                                         <input type="password" class="mdl-textfield__input" name="password">
                                     </div>
+                                </p>
+                                <p>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <label class="mdl-textfield__label">
+                                            Confirm Password
+                                        </label>
+                                        <input type="password" class="mdl-textfield__input" name="password_confirmation">
+                                    </div>
+                                </p>
+                                <p>
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                        <i class="fa fa-btn fa-user">
+                                        </i>
+                                        Submit
+                                    </button>
+                                </p>
+                            </form>
                         </div>
-                        </p>
-                        <p>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <label class="mdl-textfield__label">
-                                    Confirm Password
-                                </label>
-                                <input type="password" class="mdl-textfield__input" name="password_confirmation">
-                            </div>
-                        </p>
-                        <p>
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                                <i class="fa fa-btn fa-user">
-                                </i>
-                                注册
-                            </button>
-                        </p>
-                        </form>
+                    </section>
                 </div>
-                </section>
-        </div>
-        @endif
-        <footer class="mdl-mega-footer">
-            <div class="mdl-mega-footer--middle-section">
-                <div class="mdl-mega-footer--drop-down-section">
-                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
-                    <h1 class="mdl-mega-footer--heading">
-                        校内图书馆
-                    </h1>
-                    <ul class="mdl-mega-footer--link-list">
-                        <li>
-                            <a href="#">
-                                暨南大学图书馆
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                暨南大学珠海校区图书馆
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                暨南大学南校区图书馆
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mdl-mega-footer--drop-down-section">
-                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
-                    <h1 class="mdl-mega-footer--heading">
-                        友情链接
-                    </h1>
-                    <ul class="mdl-mega-footer--link-list">
-                        <li>
-                            <a href="#">
-                                Spec
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Tools
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Resources
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mdl-mega-footer--drop-down-section">
-                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
-                    <h1 class="mdl-mega-footer--heading">
-                        相关政策
-                    </h1>
-                    <ul class="mdl-mega-footer--link-list">
-                        <li>
-                            <a href="#">
-                                How it works
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Patterns
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Usage
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Products
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Contracts
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mdl-mega-footer--drop-down-section">
-                    <input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked>
-                    <h1 class="mdl-mega-footer--heading">
-                        帮助中心
-                    </h1>
-                    <ul class="mdl-mega-footer--link-list">
-                        <li>
-                            <a href="#">
-                                Questions
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Answers
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Contact us
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                @endif
+                <footer class="mdl-mega-footer">
             <div class="mdl-mega-footer--bottom-section">
                 <div class="mdl-logo">
                     Powered By © 2006-2016 林灿斌
@@ -330,7 +225,7 @@
                 </ul>
             </div>
         </footer>
-        </main>
+            </div>
         </div>
     </body>
     {{--
